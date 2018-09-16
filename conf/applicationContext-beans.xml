@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- ///////////////////////// DAO \\\\\\\\\\\\\\\\\\\\\\\\\ -->
+	<bean id="userLoginListDao" class="com.TCWL.system.dao.UserLoginListDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="orderSendDao" class="com.TCWL.system.dao.OrderSendDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="usualUserInfoListDao" class="com.TCWL.system.dao.UsualUserInfoListDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="geterDao" class="com.TCWL.system.dao.GeterDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="serviceCompanyDao" class="com.TCWL.system.dao.ServiceCompanyDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="senderDao" class="com.TCWL.system.dao.SenderDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="judgeDao" class="com.TCWL.system.dao.JudgeDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- ///////////////////////// Seivice \\\\\\\\\\\\\\\\\\\\\\\\\ -->
+	<bean id="orderSendService" class="com.TCWL.system.services.OrderSendService">
+		<property name="orderSendDao" ref="orderSendDao"></property>
+	</bean>
+	
+	<bean id="userLoginListService" class="com.TCWL.system.services.UserLoginListService">
+		<property name="userLoginListDao" ref="userLoginListDao"></property>
+	</bean>
+	
+	<bean id="usualUserInfoListServcie" class="com.TCWL.system.services.UsualUserInfoListService">
+		<property name="usualUserInfoListDao" ref="usualUserInfoListDao"></property>
+	</bean>
+	
+	<bean id="geterServices" class="com.TCWL.system.services.GeterServices">
+		<property name="geterDao" ref="geterDao"></property>
+	</bean>
+	<bean id="serviceCompanyService" class="com.TCWL.system.services.ServiceCompanyService">
+		<property name="serviceCompanyDao" ref="serviceCompanyDao"></property>
+	</bean>
+	<bean id="senderService" class="com.TCWL.system.services.SenderService">
+		<property name="senderDao" ref="senderDao"></property>
+	</bean>
+	<bean id="judgeService" class="com.TCWL.system.services.JudgeService">
+		<property name="judgeDao" ref="judgeDao"></property>
+	</bean>
+	
+	<!-- //// Action \\\\ -->
+	<bean id="orderSendAction" class="com.TCWL.system.action.OrderSendAction" scope="prototype">
+		<property name="orderSendService" ref="orderSendService"></property>
+		<property name="geterServices" ref="geterServices"></property>
+		<property name="serviceCompanyService" ref="serviceCompanyService"></property>
+		<property name="senderService" ref="senderService"></property>
+		<property name="userLoginListService" ref="userLoginListService"></property>
+	</bean>
+	
+	<bean id="userLoginListAction" class="com.TCWL.system.action.UserLoginListAction" scope="prototype">
+		<property name="userLoginListService" ref="userLoginListService"></property>
+	</bean>
+	
+	<bean id="usualUserInfoListAction" class="com.TCWL.system.action.UsualUserInfoListAction" scope="prototype"> 
+		<property name="usualInfoListService" ref="usualUserInfoListServcie"></property>
+	</bean>
+	
+	<bean id="geterAction" class="com.TCWL.system.action.GeterAction" scope="prototype">
+		<property name="geterServices" ref="geterServices"></property>
+	</bean>
+	
+	<bean id="serviceCompanyAction" class="com.TCWL.system.action.ServiceCompanyAction" scope="prototype">
+		<property name="serviceCompanyService" ref="serviceCompanyService"></property>
+	</bean>
+	
+	<bean id="senderAction" class="com.TCWL.system.action.SenderAction" scope="prototype">
+		<property name="senderService" ref="senderService"></property>
+		<property name="serviceCompanyService" ref="serviceCompanyService"></property>
+	</bean>
+	
+	<bean id="judgeAction" class="com.TCWL.system.action.JudgeAction" scope="prototype">
+		<property name="judgeService" ref="judgeService"></property>
+		<property name="orderSendService" ref="orderSendService"></property>
+	</bean>
+</beans>
